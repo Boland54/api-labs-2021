@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import genres from './genres';
 import genreModel from '../api/genres/genreModel';
 import movieModel from '../api/movies/movieModel';
-import movies from './movies.js';
+import movies from './api/movies.js';
 dotenv.config();
 
 // deletes all user documents in collection and inserts test data
