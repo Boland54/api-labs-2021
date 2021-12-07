@@ -6,7 +6,7 @@ import './db';
 import './seedData';
 import usersRouter from './api/users';
 import session from 'express-session';
-import authenticate from './authenticate';
+import passport from './authenticate';
 
 
 
@@ -23,18 +23,16 @@ const errHandler = (err, req, res, next) => {
 
 const app = express();
 
-app.use(session({
-  secret: 'ilikecake',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(passport.initialize());
+
 
 const port = process.env.PORT;
 app.use(express.json());
-app.use('/api/movies', authenticate, moviesRouter);
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use('/api/genres', genreRouter);
 app.use('/api/users', usersRouter);
 app.use(errHandler);
+
 
 
 
